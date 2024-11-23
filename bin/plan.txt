@@ -1,0 +1,20 @@
+STUDENT GRADE CALCULATOR
+
+1. LOGIN PAGE/CREATE NEW ACCOUNT (STUDENT/ADMIN)
+    - Select between Admin and Student
+        - Handle Login for each.
+    - Forgot Password Option.
+2a. ADMIN PAGE
+2b. STUDENT DETAIL PAGE WITH TABS FOR OTHER DETAILS
+
+Student Login Screen
+ - Online Registration/Course Registration (IF NOT REGISTERED).
+ - Student Details (IF REGISTERED)
+ - NAV BAR for other details/functions for and about the students
+
+Admin Login Screen
+ - Admin Details
+ - Ability to add students, remove, modify students details and 
+   aid in issues students experience with the system.
+
+Automatically saving all necessary data using JSON.
