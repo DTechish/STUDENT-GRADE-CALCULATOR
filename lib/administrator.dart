@@ -17,6 +17,9 @@ class Administrator {
   String email;
   bool isLoggedIn = false;
 
+  // List to store students
+  final List<Student> _students = [];
+
   // Private constructor
   Administrator._internal({
     required this.adminId,
