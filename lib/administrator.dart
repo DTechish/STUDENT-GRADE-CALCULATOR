@@ -20,6 +20,9 @@ class Administrator {
   // List to store students
   final List<Student> _students = [];
 
+  // Getter for students
+  List<Student> get students => List.unmodifiable(_students);
+
   // Private constructor
   Administrator._internal({
     required this.adminId,
@@ -64,29 +67,30 @@ class Administrator {
     );
   }
 
-  void updateStudentGrade(String studentId, double grade) {
-    if (!isLoggedIn) {
-      throw Exception('Administrator must be logged in to update grades');
-    }
-    var student = findStudent(studentId);
-    student?.addGrade(grade);
-  }
+  // void updateStudentGrade(String studentId, double grade) {
+  //   if (!isLoggedIn) {
+  //     throw Exception('Administrator must be logged in to update grades');
+  //   }
+  //   var student = findStudent(studentId);
+  //   student?.addGrade(grade);
+  // }
 
-  List<Student> getFailingStudents() {
-    return students.where((student) => !student.isPassignStudent()).toList();  
-  }
+  // List<Student> getFailingStudents() {
+  //   return students.where((student) => !student.isPassingStudent()).toList();  
+  // }
 
 
-  List<Student> getPassingStudents() {
-    return students.where((student) => student.isPassignStudent()).toList();  
-  }
+  // List<Student> getPassingStudents() {
+  //   return students.where((student) => student.isPassingStudent()).toList();  
+  // }
 
   // Statistics and Reporting
-  double getClassAverage() {
-    if (students.isEmpty) return 0.0;
-    var total = students.fold(0.0, (sum, student) => sum + student.averageGrade);
-    return total / students.length;
-  }
+  // double getClassAverage() {
+  //   if (students.isEmpty) return 0.0;
+  //   var total = students.fold(0.0, (sum, student) => sum + student.averageGrade);
+  //   return total / students.length;
+  // }
+
   @override
   String toString() {
     return '''
