@@ -52,8 +52,9 @@ class StudentValidator {
       throw ArgumentError('Gender cannot be empty');
     }
 
-    gender = gender[0].toUpperCase();
-
+// Capitalize the first letter and make the rest lowercase
+  gender = gender[0].toUpperCase() + gender.substring(1).toLowerCase();
+  
     // Allowed gender values
     const allowedGenders = ['Male', 'Female'];
     if (!allowedGenders.contains(gender)) {

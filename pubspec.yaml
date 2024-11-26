@@ -6,8 +6,9 @@ repository: https://github.com/DTechish/STUDENT-GRADE-CALCULATOR
 environment:
   sdk: '>=2.19.6 <3.0.0'
 
-# dependencies:
-#   path: ^1.8.0
+dependencies:
+  mailer: ^6.2.0
+
 
 dev_dependencies:
   lints: ^2.0.0

@@ -1,12 +1,64 @@
 import 'dart:io';
 
 import 'package:grade_calculator/administrator.dart';
+import 'package:grade_calculator/student.dart';
+import 'package:grade_calculator/student_auth_service.dart';
+
+final StudentAuthService studentAuthService = StudentAuthService();
 
 void main() {
   bool shouldRun = true;
 
   int minValue = 1;
   int maxValue = 3;
+
+  List<Student> students = [
+  Student(
+    'John Doe',        // Name
+    12345,             // ID
+    20,                // Age
+    'Male',            // Gender
+    'Computer Science',// Major
+    'password123',     // Password
+    'john.doe@email.com' // Email
+  ),
+  Student(
+    'Emma Watson',     // Name
+    54321,             // ID
+    22,                // Age
+    'Female',          // Gender
+    'Data Science',    // Major
+    'emma2023!',       // Password
+    'emma.watson@email.com' // Email
+  ),
+  Student(
+    'Michael Chen',    // Name
+    67890,             // ID
+    21,                // Age
+    'Male',            // Gender
+    'Software Engineering', // Major
+    'secure456',       // Password
+    'michael.chen@email.com' // Email
+  ),
+  Student(
+    'Sarah Johnson',   // Name
+    98765,             // ID
+    19,                // Age
+    'Female',          // Gender
+    'Artificial Intelligence', // Major
+    'sarah2023@',      // Password
+    'sarah.johnson@email.com' // Email
+  ),
+  Student(
+    'David Kim',       // Name
+    24680,             // ID
+    23,                // Age
+    'Male',            // Gender
+    'Cybersecurity',   // Major
+    'davidpass123',    // Password
+    'david.kim@email.com' // Email
+  )
+  ];
 
   do {
     displayMainMenu();
@@ -109,10 +161,38 @@ void handleAdminMenu(Administrator admin) {}
 
 void handleStudentLogin() {
   stdout.write('Enter student ID: ');
-  String? id = stdin.readLineSync();
+  int? id = int.tryParse(stdin.readLineSync() ?? '');
+
+  if (id == null) {
+    print('Invalid student ID');
+    return;
+  }
 
   stdout.write('Enter password: ');
   String? password = stdin.readLineSync();
+
+  if (password == null) {
+    print('Password cannot be empty');
+    return;
+  }
+
+  var student = studentAuthService.login(id, password);
+  if (student != null) {
+    print('Login successful');
+    // Proceed to student menu
+  } else {
+    stdout.write('Would you like to reset your password? (y/n): ');
+    String? resetChoice = stdin.readLineSync()?.toLowerCase();
+
+    if (resetChoice == 'y') {
+      stdout.write('Enter your email: ');
+      String? email = stdin.readLineSync();
+
+      if (email != null) {
+        studentAuthService.requestPasswordReset(id, email);
+      }
+    }
+  }
 }
 
 void displaySubMenu() {

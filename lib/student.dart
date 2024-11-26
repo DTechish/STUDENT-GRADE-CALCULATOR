@@ -46,7 +46,7 @@ class Student {
   int get age => _age;
   String get gender => _gender;
   String get major => _major;
-  String get emal => _email;
+  String get email => _email;
 
   bool validatePassword(String password) {
     return _password == password;
