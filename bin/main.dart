@@ -19,7 +19,12 @@ void main() {
           handleAdminLogin();
           break;
         case 2:
-          handleStudentLogin();
+          displaySubMenu();
+          choice = getUserChoice(minValue, maxValue);
+          if (choice == 1) {
+          } else if (choice == 2) {
+            handleStudentLogin();
+          }
           break;
         case 3:
           print('\nThanks for using our application!\n');
@@ -72,44 +77,51 @@ void displayMainMenu() {
 }
 
 void handleAdminLogin() {
-  var admin = Administrator();  // Get singleton instance
+  var admin = Administrator(); // Get singleton instance
   bool adminLoggedIn = false;
 
   do {
-  stdout.write('Enter username: ');
-  String? username = stdin.readLineSync();
+    stdout.write('Enter username: ');
+    String? username = stdin.readLineSync();
 
-  stdout.write('Enter password: ');
-  String? password = stdin.readLineSync();
+    stdout.write('Enter password: ');
+    String? password = stdin.readLineSync();
 
-  if (username != null && password != null) {
-    if (admin.login(username, password)) {
-      adminLoggedIn = true;
-      print('\nLogin sucessful!');
-      handleAdminMenu(admin);
-    } else {
-      print('\nInvalid credentials!');
+    if (username != null && password != null) {
+      if (admin.login(username, password)) {
+        adminLoggedIn = true;
+        print('\nLogin sucessful!');
+        handleAdminMenu(admin);
+      } else {
+        print('\nInvalid credentials!');
 
-      stdout.write('Would you like to try again? (y/n): ');
-      String? retry = stdin.readLineSync()?.toLowerCase();
+        stdout.write('Would you like to try again? (y/n): ');
+        String? retry = stdin.readLineSync()?.toLowerCase();
 
-      if (retry != 'y') break;
+        if (retry != 'y') break;
+      }
     }
-  }
-  } while(!adminLoggedIn);
+  } while (!adminLoggedIn);
 }
 
 // Add a new function to handle admin menu
-void handleAdminMenu(Administrator admin) {
-
-}
+void handleAdminMenu(Administrator admin) {}
 
 void handleStudentLogin() {
   stdout.write('Enter student ID: ');
   String? id = stdin.readLineSync();
 
   stdout.write('Enter password: ');
-  String? password = stdin.readLineSync();   
+  String? password = stdin.readLineSync();
+}
+
+void displaySubMenu() {
+  print('STUDENTS MENU\n');
+  print('''
+  1. SIGN UP
+  2. LOGIN
+  3. BACK TO MAIN MENU
+''');
 }
 
 void showAdminMenu() {
