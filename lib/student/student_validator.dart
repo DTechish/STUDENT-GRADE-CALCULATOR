@@ -4,7 +4,9 @@ class StudentValidator {
     _validateName(name);
     _validateAge(age);
     _validateGender(gender);
+    validatePassword(password);
     _validateEmail(email);
+    
   }
 
   static void _validateName(String name) {
@@ -62,6 +64,39 @@ class StudentValidator {
           'Gender must be one of the following: ${allowedGenders.join(',')}');
     }
   }
+
+ static void validatePassword(String password) {
+    // Regular expressions for different password requirements
+    final hasUppercase = RegExp(r'[A-Z]'); // At least one uppercase letter
+    final hasLowercase = RegExp(r'[a-z]'); // At least one lowercase letter
+    final hasDigit = RegExp(r'\d'); // At least one digit
+    final hasSpecialCharacter = RegExp(r'[!@#$%^&*(),.?":{}|<>_]'); // At least one special character
+
+    // Check if the password length is at least 8 characters
+    if (password.length < 8) {
+      throw ArgumentError('Password must be at least 8 characters long.');
+    }
+    
+    // Check for at least one uppercase letter
+    if (!hasUppercase.hasMatch(password)) {
+      throw ArgumentError('Password must contain at least one uppercase letter.');
+    }
+    
+    // Check for at least one lowercase letter
+    if (!hasLowercase.hasMatch(password)) {
+      throw ArgumentError('Password must contain at least one lowercase letter.');
+    }
+    
+    // Check for at least one digit
+    if (!hasDigit.hasMatch(password)) {
+      throw ArgumentError('Password must contain at least one digit.');
+    }
+    
+    // Check for at least one special character
+    if (!hasSpecialCharacter.hasMatch(password)) {
+      throw ArgumentError('Password must contain at least one special character (e.g., !@#\$%^&*())._');
+    }
+}
 
   static void _validateEmail(String email) {
     final RegExp emailRegExp = RegExp(

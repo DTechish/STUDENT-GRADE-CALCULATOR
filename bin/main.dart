@@ -1,6 +1,7 @@
 import 'package:grade_calculator/admin/admin_login.dart';
 import 'package:grade_calculator/general_functions.dart';
 import 'package:grade_calculator/student/student_login.dart';
+import 'package:grade_calculator/student/student_signup.dart';
 
 void main() async {
   bool shouldRun = true;
@@ -23,6 +24,7 @@ void main() async {
             displaySubMenu();
             choice = getUserChoice(minValue, maxValue);
             if (choice == 1) {
+              studentSignup();
             } else if (choice == 2) {
               await handleStudentLogin();
             } else if (choice == 3) {
@@ -36,6 +38,7 @@ void main() async {
           break;
       }
     } catch (error) {
+      print('Error: ${error.toString()}'); // Print the error message
       print('\nAn unexpected error occurred. Please try again.');
     }
   } while (shouldRun);

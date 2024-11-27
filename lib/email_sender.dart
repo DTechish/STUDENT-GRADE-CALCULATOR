@@ -5,7 +5,8 @@ import 'package:mailer/smtp_server.dart';
 import 'package:dotenv/dotenv.dart';
 
 // Modify your email sender to be asynchronous
-Future<bool> sendVerificationEmail(String recipientEmail, String verificationCode) async {
+Future<bool> sendVerificationEmail(
+    String recipientEmail, String verificationCode) async {
   try {
     // Your existing email sending logic
     final envFile = File('.env');
@@ -20,12 +21,16 @@ Future<bool> sendVerificationEmail(String recipientEmail, String verificationCod
     String username = env['USERNAME']!;
     String password = env['PASSWORD']!;
 
+    // Use a no-reply email address
+    const String noReplyEmail = 'no-reply@example.com';
+    const String invalidReplyToEmail = 'no-reply@invalid-domain.com'; // An invalid or non-existent email
+
     print('\nAttempting to send verification email to $recipientEmail...');
 
     final smtpServer = gmail(username, password);
 
     final message = Message()
-      ..from = Address(username, 'Grade Calculator App')
+      ..from = Address(noReplyEmail, 'Grade Calculator App')
       ..recipients.add(recipientEmail)
       ..subject = 'Password Reset Verification Code'
       ..text = '''
@@ -39,7 +44,8 @@ Future<bool> sendVerificationEmail(String recipientEmail, String verificationCod
 
       Best regards,
       Grade Calculator Team
-      ''';
+      '''
+      ..headers['Reply-To'] = invalidReplyToEmail; // Set Reply-To to an invalid addres
 
     // Send the email synchronously
     await send(message, smtpServer);

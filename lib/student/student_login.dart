@@ -5,6 +5,7 @@ import 'package:grade_calculator/student/student.dart';
 import 'package:grade_calculator/email_sender.dart';
 import 'package:grade_calculator/student/student_data.dart';
 import '../general_functions.dart';
+import 'student_validator.dart';
 
 // Handles the student login process
 Future<void> handleStudentLogin() async {
@@ -78,7 +79,8 @@ Future<void> _handleMaxLoginAttempts(Student? student) async {
     String? emailInput = stdin.readLineSync();
 
     // Check if the email exists in the database
-    Student? foundStudent = _findStudentByEmail(StudentData(), emailInput); // Pass StudentData instance
+    Student? foundStudent = _findStudentByEmail(
+        StudentData(), emailInput); // Pass StudentData instance
 
     if (foundStudent != null) {
       // If the email matches a student, allow password reset
@@ -130,8 +132,6 @@ Future<void> _resetPassword(Student student) async {
 
     if (userCode == verificationCode) {
       _updatePassword(student);
-      //VerificationCodeManager.resetVerificationCode(); // Reset code after successful reset
-
       return; // Successfully reset password
     } else {
       print(
@@ -145,16 +145,28 @@ Future<void> _resetPassword(Student student) async {
 
 // Prompts for a new password and updates it
 void _updatePassword(Student student) {
-  stdout.write('\nEnter new password: ');
-  String? newPassword = stdin.readLineSync();
+  String? newPassword;
 
-  if (newPassword != null && newPassword.length >= 6) {
-    student.resetPassword(newPassword);
-    print(
-        '\nPassword reset successful! You can now log in with your new password.');
-  } else {
-    print('Password must be at least 6 characters long or is invalid.');
+  while (true) {
+    stdout.write('\nEnter new password: ');
+    newPassword = stdin.readLineSync();
+
+    // Validate the new password
+    try {
+      if (newPassword != null) {
+        StudentValidator.validatePassword(newPassword);
+        break; // If validation passes, exit the loop
+      }
+    } catch (e) {
+      print("Error: ${e.toString()}"); // Print validation error
+    }
   }
+
+// Update the student's password
+  student.resetPassword(newPassword);
+  print(
+      '\nPassword reset successful! You can now log in with your new password.');
+
 }
 
 // Displays the student menu options

@@ -11,7 +11,7 @@ class StudentData {
       20, // Age
       'Male', // Gender
       'Computer Science', // Major
-      'password123', // Password
+      'Password1!', // Password
       'programmerdanny10@gmail.com' // Email
       ),
   Student(
@@ -20,7 +20,7 @@ class StudentData {
       22, // Age
       'Female', // Gender
       'Data Science', // Major
-      'emma2023!', // Password
+      'Emma2023\$', // Password
       'dtechish@gmail.com' // Email
       ),
   Student(
@@ -29,7 +29,7 @@ class StudentData {
       21, // Age
       'Male', // Gender
       'Software Engineering', // Major
-      'secure456', // Password
+      'Secure@123', // Password
       'dna10296@gmail.com' // Email
       ),
   Student(
@@ -38,7 +38,7 @@ class StudentData {
       19, // Age
       'Female', // Gender
       'Artificial Intelligence', // Major
-      'sarah2023@', // Password
+      'Sarah2023!', // Password
       'sarah.johnson@email.com' // Email
       ),
   Student(
@@ -47,7 +47,7 @@ class StudentData {
       23, // Age
       'Male', // Gender
       'Cybersecurity', // Major
-      'davidpass123', // Password
+      'DavidPass@123', // Password
       'david.kim@email.com' // Email
       )
   ];
