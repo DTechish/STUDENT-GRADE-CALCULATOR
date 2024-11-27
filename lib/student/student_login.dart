@@ -57,21 +57,47 @@ Student? _findStudentById(StudentData students, String? studentId) {
   return null; // Return null if no match is found
 }
 
+Student? _findStudentByEmail(StudentData students, String? email) {
+  for (var s in students.studentsList) {
+    if (s.email == email) {
+      return s; // Return the matching student
+    }
+  }
+  // Return null if no matching student is found
+  return null;
+}
+
 // Handles actions when maximum login attempts are reached
 Future<void> _handleMaxLoginAttempts(Student? student) async {
   print('Maximum login attempts reached.');
 
-  stdout.write('\nWould you like to reset your password? (y/n): ');
-  String? resetChoice = stdin.readLineSync()?.toLowerCase();
+  // Check if the student is null (indicating they may not exist)
+  if (student == null) {
+    // Prompt for email if student does not exist
+    stdout.write('\nPlease enter your registered email for password reset: ');
+    String? emailInput = stdin.readLineSync();
 
-  if (resetChoice == 'y' && student != null) {
-    if (_hasEmail(student)) {
-      await _resetPassword(student);
+    // Check if the email exists in the database
+    Student? foundStudent = _findStudentByEmail(StudentData(), emailInput); // Pass StudentData instance
+
+    if (foundStudent != null) {
+      // If the email matches a student, allow password reset
+      await _resetPassword(foundStudent);
     } else {
-      print('No email associated with this student account.');
+      print('No account associated with the provided email.');
     }
   } else {
-    print('Password reset cancelled.');
+    // If student is not null, proceed with the existing flow
+    stdout.write('\nWould you like to reset your password? (y/n): ');
+    String? resetChoice = stdin.readLineSync()?.toLowerCase();
+
+    if (resetChoice == 'y' && _hasEmail(student)) {
+      await _resetPassword(student);
+    } else if (resetChoice == 'y') {
+      print('No email associated with this student account.');
+    } else {
+      print('Password reset cancelled.');
+    }
   }
 }
 
