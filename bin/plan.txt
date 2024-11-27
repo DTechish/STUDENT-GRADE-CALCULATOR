@@ -4,6 +4,8 @@ STUDENT GRADE CALCULATOR
     - Select between Admin and Student
         - Handle Login for each.
     - Forgot Password Option.
+
+    ********* EMAIL DELAY ISSUE*********
 2a. ADMIN PAGE
 2b. STUDENT DETAIL PAGE WITH TABS FOR OTHER DETAILS
 

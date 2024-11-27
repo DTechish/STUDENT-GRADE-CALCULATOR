@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   mailer: ^6.2.0
+  dotenv: 4.2.0
 
 
 dev_dependencies:

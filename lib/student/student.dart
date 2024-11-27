@@ -1,4 +1,4 @@
-import 'package:grade_calculator/student_validator.dart';
+import 'package:grade_calculator/student/student_validator.dart';
 
 class Student {
   final String _name;
@@ -13,6 +13,8 @@ class Student {
       this._password, this._email) {
     StudentValidator.validate(_name, _age, _gender, _password, _email);
   }
+
+ 
 
   // Factory constructor to create Student from JSON
   factory Student.fromJson(Map<String, dynamic> json) {
@@ -39,6 +41,8 @@ class Student {
       'email': _email,
     };
   }
+
+
 
   // Getters for public access
   String get name => _name;

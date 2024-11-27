@@ -1,4 +1,4 @@
-import 'package:grade_calculator/student.dart';
+import 'package:grade_calculator/student/student.dart';
 
 // Creating Administrator class using the Singleton pattern
 // A singleton class is a class in OOP that's restricted to a single instance.
@@ -17,11 +17,6 @@ class Administrator {
   String email;
   bool isLoggedIn = false;
 
-  // List to store students
-  final List<Student> _students = [];
-
-  // Getter for students
-  List<Student> get students => List.unmodifiable(_students);
 
   // Private constructor
   Administrator._internal({
@@ -47,25 +42,25 @@ class Administrator {
     isLoggedIn = false;
   }
 
-  void addStudent(Student student) {
-    if(!isLoggedIn) {
-      throw Exception('Administrator must be logged in to add students.');
-    }
-    students.add(student);
-  }
+  // void addStudent(Student student) {
+  //   if(!isLoggedIn) {
+  //     throw Exception('Administrator must be logged in to add students.');
+  //   }
+  //   students.add(student);
+  // }
 
-  void removeStudent(String studentId) {
-    if(!isLoggedIn) {
-      throw Exception('Administrator must be logged in to remove students.');
-    }
-    students.removeWhere((student) => student.id == studentId);
-  }
+  // void removeStudent(String studentId) {
+  //   if(!isLoggedIn) {
+  //     throw Exception('Administrator must be logged in to remove students.');
+  //   }
+  //   students.removeWhere((student) => student.id == studentId);
+  // }
 
-  Student? findStudent(String studentId) {
-    return students.firstWhere((student) => student.id == studentId,
-    orElse: () => throw Exception('Student not found'),
-    );
-  }
+  // Student? findStudent(String studentId) {
+  //   return students.firstWhere((student) => student.id == studentId,
+  //   orElse: () => throw Exception('Student not found'),
+  //   );
+  // }
 
   // void updateStudentGrade(String studentId, double grade) {
   //   if (!isLoggedIn) {
