@@ -1,8 +1,6 @@
 import 'package:grade_calculator/student/student.dart';
 
 class StudentData {
-
-
     // List to store students
   final List<Student> _students = [
     Student(
