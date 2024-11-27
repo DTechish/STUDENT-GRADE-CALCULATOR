@@ -4,8 +4,8 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:dotenv/dotenv.dart';
 
-// Modify your email sender to be synchronous
-bool sendVerificationEmail(String recipientEmail, String verificationCode) {
+// Modify your email sender to be asynchronous
+Future<bool> sendVerificationEmail(String recipientEmail, String verificationCode) async {
   try {
     // Your existing email sending logic
     final envFile = File('.env');
@@ -42,7 +42,7 @@ bool sendVerificationEmail(String recipientEmail, String verificationCode) {
       ''';
 
     // Send the email synchronously
-    send(message, smtpServer);
+    await send(message, smtpServer);
     print('Email sent successfully!');
     return true;
   } catch (e) {

@@ -1,9 +1,8 @@
 import 'package:grade_calculator/admin/admin_login.dart';
-import 'package:grade_calculator/admin/administrator.dart';
 import 'package:grade_calculator/general_functions.dart';
 import 'package:grade_calculator/student/student_login.dart';
 
-void main() {
+void main() async {
   bool shouldRun = true;
 
   int minValue = 1;
@@ -25,7 +24,7 @@ void main() {
             choice = getUserChoice(minValue, maxValue);
             if (choice == 1) {
             } else if (choice == 2) {
-              handleStudentLogin();
+              await handleStudentLogin();
             } else if (choice == 3) {
               break;
             }

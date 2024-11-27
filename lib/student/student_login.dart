@@ -7,7 +7,7 @@ import 'package:grade_calculator/student/student_data.dart';
 import '../general_functions.dart';
 
 // Handles the student login process
-void handleStudentLogin() {
+Future<void> handleStudentLogin() async {
   StudentData students = StudentData();
   const int maxLoginAttempts = 3;
   int loginAttempts = 0;
@@ -28,7 +28,7 @@ void handleStudentLogin() {
       print('\nInvalid credentials!');
 
       if (loginAttempts >= maxLoginAttempts) {
-        _handleMaxLoginAttempts(student);
+        await _handleMaxLoginAttempts(student);
         break; // Exit the login loop after handling max attempts
       }
     }
@@ -58,7 +58,7 @@ Student? _findStudentById(StudentData students, String? studentId) {
 }
 
 // Handles actions when maximum login attempts are reached
-void _handleMaxLoginAttempts(Student? student) {
+Future<void> _handleMaxLoginAttempts(Student? student) async {
   print('Maximum login attempts reached.');
 
   stdout.write('\nWould you like to reset your password? (y/n): ');
@@ -66,7 +66,7 @@ void _handleMaxLoginAttempts(Student? student) {
 
   if (resetChoice == 'y' && student != null) {
     if (_hasEmail(student)) {
-      _resetPassword(student);
+      await _resetPassword(student);
     } else {
       print('No email associated with this student account.');
     }
@@ -81,14 +81,15 @@ bool _hasEmail(Student student) {
 }
 
 // Resets the student's password
-void _resetPassword(Student student) {
+Future<void> _resetPassword(Student student) async {
   // Generate verification code
-  final String verificationCode = (100000 + Random().nextInt(900000)).toString();
+  final String verificationCode =
+      (100000 + Random().nextInt(900000)).toString();
   print(
-      'Verification code generated: $verificationCode');       // For testing, you can remove this line in production
+      'Verification code generated: $verificationCode'); // For testing, you can remove this line in production
 
   // Send email directly
-  bool emailSent = sendVerificationEmail(student.email, verificationCode);
+  bool emailSent = await sendVerificationEmail(student.email, verificationCode);
 
   if (!emailSent) {
     print('Failed to send verification email. Please try again.');
@@ -103,8 +104,7 @@ void _resetPassword(Student student) {
 
     if (userCode == verificationCode) {
       _updatePassword(student);
-          //VerificationCodeManager.resetVerificationCode(); // Reset code after successful reset
- 
+      //VerificationCodeManager.resetVerificationCode(); // Reset code after successful reset
 
       return; // Successfully reset password
     } else {
