@@ -12,7 +12,7 @@ class StudentData {
       'Male', // Gender
       'Computer Science', // Major
       'password123', // Password
-      'programmerdanny10@gmail.com' // Email
+      'examplemail@gmail.com' // Email
       ),
   Student(
       'Emma Watson', // Name
@@ -21,7 +21,7 @@ class StudentData {
       'Female', // Gender
       'Data Science', // Major
       'emma2023!', // Password
-      'dtechish@gmail.com' // Email
+      'testhotmail@gmail.com' // Email
       ),
   Student(
       'Michael Chen', // Name
@@ -30,7 +30,7 @@ class StudentData {
       'Male', // Gender
       'Software Engineering', // Major
       'secure456', // Password
-      'dna10296@gmail.com' // Email
+      'seniorman@gmail.com' // Email
       ),
   Student(
       'Sarah Johnson', // Name
